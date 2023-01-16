@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset="utf-8">
+        <title>Standalone checker</title> 
+        <link rel="stylesheet" href="css/Styles.css">
+        <script src="js/is-client-side-rendering.js"></script>
+    </head>
+    <body>
+        <h1>The Standalone checker</h1> 
+        <p> This tool is still in development.</p>
+
+        <p id="output">Enter a URL to see if the site needs Standalone</p>
+        <h2 id="ptag"></h2>
+        <h2 id="h1tag"></h2>
+        <h2 id="h2tag"></h2>
+        <h2 id="h3tag"></h2>
+        <h2 id="atag"></h2>
+        <h2 id="total"></h2>
+        <h2 id="script"></h2>
+
+        <form>
+            <label for="source"> Enter your website url into this box . </label>
+            <input type = "text" id="source" name="source"/>
+            <label for="rendered"> Copy and paste the rendered website data into this box.</label> 
+            <input type = "text" id="rendered" name="rendered"/>
+            <input type = "button" onclick = "detectClientSideRendering(source.value,rendered.value)" value = "Display">  
+
+        </form>
+        
+       
+
+        
+    </body>
+</html>
