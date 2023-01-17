@@ -24,3 +24,17 @@ h2{
 label{
   color:  #59ad23;  
 }
+
+img{
+  width: 360px;
+  height: 240px;
+}
+
+
+
+#renderimg{
+  position:absolute; 
+  left: 700px; 
+  
+
+}
