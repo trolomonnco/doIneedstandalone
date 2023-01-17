@@ -21,6 +21,8 @@ console.log(domFormRendered.getElementsByTagName('a'));
 var atags = domFormRendered.getElementsByTagName('a');
 var atagcontent = [];
 
+var needsSA = false;
+
 //Print the ptags from the rendered form of the site 
 for (var i=0; i<ptags.length;i++){
  
@@ -135,6 +137,9 @@ xhr.onreadystatechange = function() {
     let element5 = document.getElementById("atag");
     let element6 = document.getElementById("total");
     let element7 = document.getElementById("script");
+    let element8 = document.getElementById("vue");
+    let element9 = document.getElementById("react");
+    let element10 = document.getElementById("conclusion");
 
     element1.innerHTML = "Percentage of rendered ptags found in source: "+((pTagsPresent/ptagcontent.length)*100)+("%");
     element2.innerHTML = "Percentage of rendered h1tags found in source: "+((h1TagsPresent/h1tagcontent.length)*100)+("%");
@@ -147,6 +152,37 @@ xhr.onreadystatechange = function() {
     const scriptTags = sourceHtml.match(scriptTagRegex);
     element7.innerHTML = `Number of script tags: ${scriptTags.length}`;
     
+
+
+    // testing the detection of different js libraries 
+    if(sourceHtml.includes("vue")){
+      console.log("Source contains references to Vue.js - standalone/hybrid required ");
+      element8.innerHTML = `References to Vue.js detected &#128308; `;
+      needsSA =true;
+    }
+    else{
+      console.log("No references to vue ");
+      element8.innerHTML = `Source contains no reference to Vue.js &#128994;`;
+    }
+
+    if(sourceHtml.includes("react")){
+      console.log("Source contains references to React.js - standalone/hybrid required ");
+      element9.innerHTML = `References to React.js detected &#128308; `;
+      needsSA =true;
+    }
+    else{
+      console.log("No references to React ");
+      element9.innerHTML = `Source contains no reference to React.js &#128994;`;
+    }
+
+    if(needsSA){
+      element10.innerHTML = `This site has been flagged as requiring Standalone or Hybrid integration &#10071; `;
+    }
+
+    else{
+      element10.innerHTML = `No evidence detected for requiring Standalone &#128994;`;
+    }
+
   }
   else{
     console.log("Couldn't access page");
