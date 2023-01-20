@@ -22,6 +22,7 @@ var atags = domFormRendered.getElementsByTagName('a');
 var atagcontent = [];
 
 var needsSA = false;
+var canHaveHybrid = true;
 
 //Print the ptags from the rendered form of the site 
 for (var i=0; i<ptags.length;i++){
@@ -139,6 +140,7 @@ xhr.onreadystatechange = function() {
     let element7 = document.getElementById("script");
     let element8 = document.getElementById("vue");
     let element9 = document.getElementById("react");
+    let element11 = document.getElementById("gatsby");
     let element10 = document.getElementById("conclusion");
 
     element1.innerHTML = "Percentage of rendered ptags found in source: "+((pTagsPresent/ptagcontent.length)*100)+("%");
@@ -146,37 +148,76 @@ xhr.onreadystatechange = function() {
     element3.innerHTML = "Percentage of rendered h2tags found in source: "+((h2TagsPresent/h2tagcontent.length)*100)+("%");
     element4.innerHTML = "Percentage of rendered h3tags found in source: "+((h3TagsPresent/h3tagcontent.length)*100)+("%");
     element5.innerHTML = "Percentage of rendered atags found in source: "+((aTagsPresent/atagcontent.length)*100)+("%");
-    element6.innerHTML = "Percentage of non-client side rendering content (of element p,h1,h2,h3,a): "+(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100)+("%");
+    element6.innerHTML = "Percentage of client side rendering content (of element p,h1,h2,h3,a): "+(100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))+("%");
+    if ((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>90){
+      element6.style.color = 'red';
+    }
+    else if((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>60){
+      element6.style.color = 'orange';
+    }
+    else if((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>40){
+      element6.style.color = 'yellow';
+    }
 
     const scriptTagRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
     const scriptTags = sourceHtml.match(scriptTagRegex);
     element7.innerHTML = `Number of script tags: ${scriptTags.length}`;
     
+    //Add gatsby functionality 
 
 
     // testing the detection of different js libraries 
     if(sourceHtml.includes("vue")){
       console.log("Source contains references to Vue.js - standalone/hybrid required ");
       element8.innerHTML = `References to Vue.js detected &#128308; `;
+      element8.style.color = 'red';
       needsSA =true;
     }
     else{
       console.log("No references to vue ");
-      element8.innerHTML = `Source contains no reference to Vue.js &#128994;`;
+      element8.innerHTML = `No reference to Vue.js detected &#128994;`;
     }
 
     if(sourceHtml.includes("react")){
-      console.log("Source contains references to React.js - standalone/hybrid required ");
+      console.log("Source contains references to React.js - Standalone required ");
       element9.innerHTML = `References to React.js detected &#128308; `;
+      element9.style.color = 'red';
       needsSA =true;
+      canHaveHybrid = false;
     }
     else{
       console.log("No references to React ");
-      element9.innerHTML = `Source contains no reference to React.js &#128994;`;
+      element9.innerHTML = `No reference to React.js detected &#128994;`;
     }
 
-    if(needsSA){
-      element10.innerHTML = `This site has been flagged as requiring Standalone or Hybrid integration &#10071; `;
+    if(sourceHtml.includes("content=\"Gatsby")){
+      console.log("Source contains references to Gatsby.js - Standalone required ");
+      element11.innerHTML = `References to Gatsby.js detected &#128308; `;
+      element11.style.color = 'red';
+      needsSA =true;
+      canHaveHybrid = false;
+    }
+    else{
+      console.log("No references to Gatsby ");
+      element11.innerHTML = `No reference to Gatsby.js detected &#128994;`;
+    }
+
+    if((needsSA && !canHaveHybrid) || (((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100) ==0){
+      element10.innerHTML = `This site has been flagged as requiring Standalone (not hybrid) - please see above  &#10071; `;
+      element10.style.color = 'red';
+      
+    }
+
+    else if (needsSA && canHaveHybrid){
+      element10.innerHTML = `This site has been flagged as requiring Standalone or Hybrid integration - please see above  &#10071; `;
+      element10.style.color = 'red';
+
+    }
+
+    else if ((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>40){
+      element10.innerHTML = `This site has been flagged as having a large amount of client side rendering content - please see above  &#10071; `;
+      element10.style.color = 'orange';
+
     }
 
     else{

@@ -2,45 +2,69 @@
 <html> 
     <head>
         <meta charset="utf-8">
-        <title>Standalone checker</title> 
+        <title>Standalone Checker</title> 
         <link rel="stylesheet" href="css/Styles.css">
         <script src="js/is-client-side-rendering.js"></script>
     </head>
     <body>
-        <h1>The Standalone checker</h1> 
-        <p> This tool is still in development.</p>
-
-        <p id="output">Enter the website url into the box on the left</p>
-        <p>Enter the rendered webstite html (obtained by inspecting and copying the html element) into the box on the right</p>
-        <h2 id="ptag"></h2>
-        <h2 id="h1tag"></h2>
-        <h2 id="h2tag"></h2>
-        <h2 id="h3tag"></h2>
-        <h2 id="atag"></h2>
-        <h2 id="total"></h2>
-        <h2 id="script"></h2>
-        <hr> 
-        <h2 id="vue"></h2>
-        <h2 id="react"></h2>
-        <hr> 
-        <h2 id ="conclusion"></h2>
-        <table>
-            <tr>
-                <IMG SRC="insertsource.gif" id="sourceimg">
-                <IMG SRC="render.gif" id="renderimg">   
+        <div id="banner"> 
+            <table id="banner">
+            <tr> <h1>The Standalone Checker</h1> 
+                <IMG SRC="ezoic.png" id="logo">
             </tr>
-        </table>
+            </table>
+        </div>
         
-        <form>
-            <label for="source"> Enter your website url into this box . </label>
-            <input type = "text" id="source" name="source"/>
-            <label for="rendered"> Copy and paste the rendered website data into this box.</label> 
-            <input type = "text" id="rendered" name="rendered"/>
-            <input type = "button" onclick = "detectClientSideRendering(source.value,rendered.value)" value = "Display">  
+        <div id="disclaimer">
+            <p> This tool is still in development - if in doubt contact a Sales Engineer for confirmation</p>
+            <p> To provide feedback on this tool please contact Solomon England</p>
+        </div>
 
-        </form>
+        <p id ="cors"> Before using this tool please navigate <a href ="https://cors-anywhere.herokuapp.com/corsdemo">HERE</a> and "Request temporary access to the demo server</p>
+
+
         
-       
+
+        <div id="maincontent">
+            
+            <table id="report">
+                <tr><h2 id="ptag"></h2></tr>
+                <tr><h2 id="h1tag"></h2></tr>
+                <tr><h2 id="h2tag"></h2></tr>
+                <tr><h2 id="h3tag"></h2></tr>
+                <tr><h2 id="atag"></h2></tr>
+                <tr><h2 id="total"></h2></tr>
+                <tr><h2 id="script"></h2></tr>
+            </table>
+            <hr> 
+            <h2 id="vue"></h2>
+            <h2 id="react"></h2>
+            <h2 id="gatsby"></h2>
+            <hr> 
+            <h2 id ="conclusion"></h2>
+            <div id ="images">
+                <table>
+                    <tr>
+                        <IMG SRC="insertsource.gif" id="sourceimg">
+                        <IMG SRC="render.gif" id="renderimg">   
+                    </tr>
+                </table>
+            </div>
+        
+            <form>
+                <div id="leftchunk">
+                    <label for="source"> Enter your website url into this box . </label>
+                    <input type = "text" id="source" name="source"/>
+                </div>
+                <div id="rightchunk">
+                    <label for="rendered"> Copy and paste the rendered website data into this box.</label> 
+                    <input type = "text" id="rendered" name="rendered"/>
+                </div>
+                <input type = "button" id="buttonClick" onclick = "detectClientSideRendering(source.value,rendered.value)" value = "Run Test">  
+
+            </form>
+        
+        </div>
 
         
     </body>
