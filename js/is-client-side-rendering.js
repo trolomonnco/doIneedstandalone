@@ -178,7 +178,7 @@ xhr.onreadystatechange = function() {
       element8.innerHTML = `No reference to Vue.js detected &#128994;`;
     }
 
-    if(sourceHtml.includes("react")){
+    if(sourceHtml.includes("data-react")){
       console.log("Source contains references to React.js - Standalone required ");
       element9.innerHTML = `References to React.js detected &#128308; `;
       element9.style.color = 'red';
@@ -214,9 +214,27 @@ xhr.onreadystatechange = function() {
 
     }
 
-    else if ((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>40){
-      element10.innerHTML = `This site has been flagged as having a large amount of client side rendering content - please see above  &#10071; `;
+    else if ((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>80){
+      element10.innerHTML = `This site has been flagged as having a very large amount of client side rendering content - it is highly likely Standalone is required  &#10071; `;
+      element10.style.color = 'red';
+
+    }
+
+    else if ((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>60){
+      element10.innerHTML = `This site has been flagged as having a substantial amount of client side rendering content - it is likely Standalone is required  &#10071; `;
       element10.style.color = 'orange';
+
+    }
+
+    else if ((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>40){
+      element10.innerHTML = `This site has been flagged as having a moderate amount of client side rendering content - depending on the content loaded Standalone may be required  &#10071; `;
+      element10.style.color = 'yellow';
+
+    }
+
+    else if ((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>20){
+      element10.innerHTML = `This site has been flagged as having a some client side rendering content - depending on the content loaded Standalone may be required  &#10071; `;
+      element10.style.color = 'yellow';
 
     }
 
