@@ -143,6 +143,18 @@ xhr.onreadystatechange = function() {
     let element11 = document.getElementById("gatsby");
     let element10 = document.getElementById("conclusion");
 
+    element1.style.color = 'black';
+    element2.style.color = 'black';
+    element3.style.color = 'black';
+    element4.style.color = 'black';
+    element5.style.color = 'black';
+    element6.style.color = 'black';
+    element7.style.color = 'black';
+    element8.style.color = 'black';
+    element9.style.color = 'black';
+    element10.style.color = 'black';
+    element11.style.color = 'black';
+
     element1.innerHTML = "Percentage of rendered ptags found in source: "+((pTagsPresent/ptagcontent.length)*100)+("%");
     element2.innerHTML = "Percentage of rendered h1tags found in source: "+((h1TagsPresent/h1tagcontent.length)*100)+("%");
     element3.innerHTML = "Percentage of rendered h2tags found in source: "+((h2TagsPresent/h2tagcontent.length)*100)+("%");
@@ -161,7 +173,12 @@ xhr.onreadystatechange = function() {
 
     const scriptTagRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
     const scriptTags = sourceHtml.match(scriptTagRegex);
-    element7.innerHTML = `Number of script tags: ${scriptTags.length}`;
+    if(scriptTags !=null){
+      element7.innerHTML = `Number of script tags: ${scriptTags.length}`;
+    }
+    else{
+      element7.innerHTML = `No script tags detected`;
+    }
     
     //Add gatsby functionality 
 
@@ -178,13 +195,22 @@ xhr.onreadystatechange = function() {
       element8.innerHTML = `No reference to Vue.js detected &#128994;`;
     }
 
-    if(sourceHtml.includes("data-react")){
+    if(sourceHtml.includes("data-react")|| sourceHtml.includes("react-dom")){
       console.log("Source contains references to React.js - Standalone required ");
-      element9.innerHTML = `References to React.js detected &#128308; `;
+      element9.innerHTML = `Direct References to React.js  detected &#128308; `;
       element9.style.color = 'red';
       needsSA =true;
       canHaveHybrid = false;
     }
+
+    else if(sourceHtml.includes("react")){
+      console.log("Source contains the word react, please search source (ctrl U, ctrl f - react) to see if this is in reference to React.js");
+      element9.innerHTML = `Direct References to React.js  detected &#128308; `;
+      element9.style.color = 'red';
+      needsSA =true;
+      canHaveHybrid = false;
+    }
+
     else{
       console.log("No references to React ");
       element9.innerHTML = `No reference to React.js detected &#128994;`;
@@ -197,6 +223,7 @@ xhr.onreadystatechange = function() {
       needsSA =true;
       canHaveHybrid = false;
     }
+    
     else{
       console.log("No references to Gatsby ");
       element11.innerHTML = `No reference to Gatsby.js detected &#128994;`;

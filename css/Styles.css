@@ -1,52 +1,104 @@
-
 body{
-    background-color:white ;
-    padding: 0;
-    margin: 0;
+  margin : 0;
+  text-align: center;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+  background-color: #CDE990;
 }
-
-hr{
-    border-style:none;
-    border-top-style: dotted;
-    border-color: grey;
-    border-width: 5px;
-    width: 5%;
-}
-
 p{
-  color: black;
-  font-family: "Times New Roman";
+  padding: 8px;
+  margin: 0;
 }
-
 h1{
-  color:  white;
-  background-color: black; 
-  position:absolute; 
-  left: 100px;
-  font-size: 35px;
- 
+  margin:0;
+  padding: 20px;
 }
 h2{
-  color:  #59ad23;  
+  padding: 5px;
+}
+h3{
+  padding: 5px;
+  
+}
+hr{
+  border: 5px dashed #FFD4D4;
+ 
+}
+.right{
+ position: absolute;
+ max-width: 40%;
+ max-height: 10%;
+ margin-left: 55%;
+ padding: 6px;
+ font-size: 20px;
+
+
 }
 
-label{
-  color:  #59ad23;  
+.left{
+  position: absolute;
+  max-width: 40%;
+  max-height: 10%;
+  margin-left: 19%;
+  padding: 6px;
+  font-size: 20px;
+  
+}
+.inputSource{
+  position: absolute;
+  max-width: 40%;
+  max-height: 10%;
+  margin-left: 24%;
+  margin-top: 2%;
+}
+.inputRendered{
+  position: absolute;
+ max-width: 40%;
+ max-height: 10%;
+ margin-left: 66%;
+ margin-top: 2%;
+}
+
+
+.cors{
+  background-color: #FFD4D4;
+  border-style: solid;
+  border-color: black;
+  color: black;
 }
 
 img{
-  width: 480px;
-  height: 360px;
+  
   
 }
+.dataInput{
+  
 
-form{
-  background-color: #B8B8B8;
-  color: black;
-  text-align: center;
-  border: 5px solid black;
-  padding: 5px;
-  margin: 5px;
+}
+.disclaimer{
+  background-color: #AACB73;
+  color: White;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+  border-style: solid;
+  border-color: gray;
+  
+}
+.banner{
+background-color: black;
+color: white;
+}
+
+
+.logo{
+  max-width: 5%;
+}
+
+.logo img{
+  position: absolute;
+  max-width: 75px;
+  max-height: 75px;
+  
 }
 
 #buttonClick {
@@ -69,84 +121,3 @@ form{
   display: inline-block;
   font-size: 16px;
 }
-#cors{
-  position:absolute; 
-  width: 100%;
-  top: 190px;
-  font-size: 20px; 
-  text-align: center;
-  background-color: red;
-  color: white;
-}
-
-
-
-#renderimg{
-  
-  left: 950px; 
-  border: 5px solid #59ad23;
-
-}
-#sourceimg{
-  left: 300px;
-  border: 5px solid #59ad23;
-
-}
-
-#logo{
-  width:80px;
-  height:80px;
-}
-
-#banner{
-  background-color: black;
-  width: 100%;
-}
-
-
-#disclaimer{
-  text-align: center;
-  background-color: #59ad23;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: bold;
-  position:absolute; 
-  width: 100%;
-  top: 80px;
-  font-size: 25px;
-}
-
-#maincontent{
-  position:absolute; 
-  width: 100%;
-  top: 40%;
-  font-size: 15px;
-}
-
-#leftchunk{
-  
-  position:absolute; 
-  left: 10%;
-}
-
-#rightchunk{
-  
-  position:absolute; 
-  right: 10%;
-}
-
-label{
-  color: black;
-  
-}
-
-#renderimg{
-  position: absolute;
-  left :67.5%;
-  
-}
-
-
-
-
-
-

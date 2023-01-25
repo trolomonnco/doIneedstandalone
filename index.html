@@ -7,62 +7,81 @@
         <script src="js/is-client-side-rendering.js"></script>
     </head>
     <body>
-        <div id="banner"> 
+        <div class="banner"> 
             <table id="banner">
-            <tr> <h1>The Standalone Checker</h1> 
-                <IMG SRC="ezoic.png" id="logo">
+            <tr> 
+                <div class="logo"><IMG SRC="ezoic.png" ></div>
+                <h1>The Standalone Checker</h1>    
             </tr>
             </table>
         </div>
         
-        <div id="disclaimer">
+        <div class="disclaimer">
             <p> This tool is still in development - please refresh the page after every use - if in doubt contact a Sales Engineer for confirmation</p>
             <p> To provide feedback on this tool please contact Solomon England</p>
+            <p class ="cors"> Before using this tool please navigate <a href ="https://cors-anywhere.herokuapp.com/corsdemo">HERE</a> and "Request temporary access to the demo server</p>
+    
         </div>
 
-        <p id ="cors"> Before using this tool please navigate <a href ="https://cors-anywhere.herokuapp.com/corsdemo">HERE</a> and "Request temporary access to the demo server</p>
-
-
-        
-
-        <div id="maincontent">
+        <div id="dataInput">
+            <h2 id="inputDataTitle">Input your site here</h2>
             
-            <table id="report">
-                <tr><h2 id="ptag"></h2></tr>
-                <tr><h2 id="h1tag"></h2></tr>
-                <tr><h2 id="h2tag"></h2></tr>
-                <tr><h2 id="h3tag"></h2></tr>
-                <tr><h2 id="atag"></h2></tr>
-                <tr><h2 id="total"></h2></tr>
-                <tr><h2 id="script"></h2></tr>
-            </table>
-            <hr> 
-            <h2 id="vue"></h2>
-            <h2 id="react"></h2>
-            <h2 id="gatsby"></h2>
-            <hr> 
-            <h2 id ="conclusion"></h2>
-            <div id ="images">
-                <table>
-                    <tr>
-                        <IMG SRC="insertsource.gif" id="sourceimg">
-                        <IMG SRC="render.gif" id="renderimg">   
-                    </tr>
-                </table>
-            </div>
-        
-            <form>
-                <div id="leftchunk">
-                    <label for="source"> Enter your website url into this box . </label>
-                    <input type = "text" id="source" name="source"/>
+                <div id ="images">
+                    <table>
+                        <tr>
+                            <IMG SRC="insertsource.gif" id="sourceimg">
+                            <IMG SRC="render.gif" id="renderimg">   
+                        </tr>
+                    </table>
                 </div>
-                <div id="rightchunk">
-                    <label for="rendered"> Copy and paste the rendered website data into this box.</label> 
-                    <input type = "text" id="rendered" name="rendered"/>
-                </div>
-                <input type = "button" id="buttonClick" onclick = "detectClientSideRendering(source.value,rendered.value)" value = "Run Test">  
+                
+                <form>
+                    <div class="left">
+                        <label for="source"> Enter your website url into this box. </label>
+                    </div>
+                    <div class ="inputSource">
+                        <input type = "text" id="source" name="source"/>
+                    </div>
+                    <div class ="right">
+                        <label for="rendered"> Copy and paste the rendered website data into this box.</label> 
+                    </div>
+                    <div class ="inputRendered">
+                        <input type = "text" id="rendered" name="rendered"/>
+                    </div>
 
-            </form>
+                    <input type = "button" id="buttonClick" onclick = "detectClientSideRendering(source.value,rendered.value)" value = "Run Test">  
+
+                </form>
+        </div>
+        
+
+        <div id="contentReport">
+            <hr>
+            <h2 id="contentReportTitle"> ⬇ Content Report ⬇</h2>
+            <table id="report">
+                <tr><h3 id="ptag">The % of server side rendered p tags will show here</h3></tr>
+                <tr><h3 id="h1tag">The % of server side rendered h1 tags will show here</h3></tr>
+                <tr><h3 id="h2tag">The % of server side rendered h2 tags will show here</h3></tr>
+                <tr><h3 id="h3tag">The % of server side rendered h3 tags will show here</h3></tr>
+                <tr><h3 id="atag">The % of server side rendered hyperlink tags (a tags) will show here</h3></tr>
+                <tr><h3 id="total">The  % of the total number of server side rendered content tags assessed will show here</h3></tr>
+                <tr><h3 id="script">The total number of script tags found will be shown here</h3></tr>
+            </table>
+        </div>
+        <div id="clientSideRenderingReport">
+            <hr>
+            <h2 id="clientSideRenderingTitle">Client-side Rendering Libraries</h2> 
+            <h3 id="vue">The detection of Vue will show here </h3>
+            <h3 id="react">The detection of React will show here</h3>
+            <h3 id="gatsby">The detection of Gatsby</h3>
+        </div>
+
+        <div id="conclusionReport"></div>
+            <hr> 
+            <h2 id ="conclusionTitle">Conclusion</h2>
+            <h3 id ="conclusion">Suggestions at to whether the provided site will need standalone will appear here, these suggestions are based on what can be detected by this tool and may not be 100% accurate, if you feel the tool has misidentified as to whether a site requires standalone please contact a sales engineer.</h3>
+            <hr> 
+            
         
         </div>
 
