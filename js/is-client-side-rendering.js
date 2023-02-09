@@ -23,6 +23,7 @@ var atagcontent = [];
 
 var needsSA = false;
 var canHaveHybrid = true;
+var needsChecks =false;
 
 //Print the ptags from the rendered form of the site 
 for (var i=0; i<ptags.length;i++){
@@ -142,6 +143,10 @@ xhr.onreadystatechange = function() {
     let element9 = document.getElementById("react");
     let element11 = document.getElementById("gatsby");
     let element10 = document.getElementById("conclusion");
+    let element12 = document.getElementById("angular");
+    let element13 =document.getElementById("ember");
+    let element14 = document.getElementById("svelte");
+    let element15 = document.getElementById("preact");
 
     element1.style.color = 'black';
     element2.style.color = 'black';
@@ -205,10 +210,9 @@ xhr.onreadystatechange = function() {
 
     else if(sourceHtml.includes("react")){
       console.log("Source contains the word react, please search source (ctrl U, ctrl f - react) to see if this is in reference to React.js");
-      element9.innerHTML = `Direct References to React.js  detected &#128308; `;
-      element9.style.color = 'red';
-      needsSA =true;
-      canHaveHybrid = false;
+      element9.innerHTML = `Source contains the word react, please search source (ctrl U, ctrl f - react) to see if this is in reference to React.js &#128992;`;
+      element9.style.color = 'orange';
+      needsChecks = true;
     }
 
     else{
@@ -217,7 +221,7 @@ xhr.onreadystatechange = function() {
     }
 
     if(sourceHtml.includes("content=\"Gatsby")){
-      console.log("Source contains references to Gatsby.js - Standalone required ");
+      console.log("Source contains Direct references to Gatsby.js - Standalone required ");
       element11.innerHTML = `References to Gatsby.js detected &#128308; `;
       element11.style.color = 'red';
       needsSA =true;
@@ -228,6 +232,82 @@ xhr.onreadystatechange = function() {
       console.log("No references to Gatsby ");
       element11.innerHTML = `No reference to Gatsby.js detected &#128994;`;
     }
+
+    if(sourceHtml.includes("angular")){
+      console.log("Source contains the word angular, please search source (ctrl U, ctrl f - angular) to see if this is in reference to angular.js");
+      element12.innerHTML = `Source contains the word angular, please search source (ctrl U, ctrl f - angular) to see if this is in reference to angular.js &#128992;`;
+      element12.style.color = 'orange';
+      needsChecks = true;
+    }
+    
+    else{
+      console.log("no references to angular ");
+      element12.innerHTML = `No reference to Angular detected &#128994;`;
+    }
+
+    if(sourceHtml.includes("data-ember-action")|| sourceHtml.includes("ember.js") || sourceHtml.includes("ember.js")|| sourceHtml.includes("ember.min.js") ){
+      console.log("Source contains Direct references to Ember - Standalone required");
+      element13.innerHTML = `Source contains Direct references to Ember - Standalone required`;
+      element13.style.color = 'red';
+      needsSA =true;
+      canHaveHybrid = false;
+    }
+
+    else if(sourceHtml.includes("ember")){
+      console.log("Source contains the word ember, please search source (ctrl U, ctrl f - ember) to see if this is in reference to Ember.js");
+      element13.innerHTML = `Source contains the word ember, please search source (ctrl U, ctrl f - ember) to see if this is in reference to Ember.js &#128992;`;
+      element13.style.color = 'orange';
+      needsChecks = true;
+    }
+    
+    else{
+      console.log("no references to Ember ");
+      element13.innerHTML = `No reference to Ember detected &#128994;`;
+    }
+
+    // detecting use of Svelte
+    if(sourceHtml.includes("svelte.js")||  sourceHtml.includes("svelte.min.js") ||  sourceHtml.includes("svelte-") ){
+      console.log("Source contains Direct references to Svelte - Standalone required");
+      element14.innerHTML = `Source contains Direct references to Svelte - Standalone required`;
+      element14.style.color = 'red';
+      needsSA =true;
+      canHaveHybrid = false;
+    }
+
+    else if(sourceHtml.includes("svelte")){
+      console.log("Source contains the word svelte, please search source (ctrl U, ctrl f - svelte) to see if this is in reference to svelte.js");
+      element14.innerHTML = `Source contains the word svelte, please search source (ctrl U, ctrl f - svelte) to see if this is in reference to svelte.js &#128992;`;
+      element14.style.color = 'orange';
+      needsChecks = true;
+    }
+    
+    else{
+      console.log("no references to Svelte ");
+      element14.innerHTML = `No reference to Svelte detected &#128994;`;
+    }
+
+    //Detecting the use of preact
+    if(sourceHtml.includes("preact.js")||  sourceHtml.includes("preact.js") ||  sourceHtml.includes("preact-") ){
+      console.log("Source contains Direct references to Preact - Standalone required");
+      element15.innerHTML = `Source contains Direct references to Preact - Standalone required`;
+      element15.style.color = 'red';
+      needsSA =true;
+      canHaveHybrid = false;
+    }
+
+    else if(sourceHtml.includes("preact")){
+      console.log("Source contains the word preact, please search source (ctrl U, ctrl f - preact) to see if this is in reference to preact.js");
+      element15.innerHTML = `Source contains the word preact, please search source (ctrl U, ctrl f - preact) to see if this is in reference to preact.js &#128992;`;
+      element15.style.color = 'orange';
+      needsChecks = true;
+    }
+    
+    else{
+      console.log("no references to Svelte ");
+      element15.innerHTML = `No reference to Preact detected &#128994;`;
+    }
+    // Provide a conclusion as to whether the site requires standalone or not
+    var furtherChecksString = " - Further checks are needed, please see above"
 
     if((needsSA && !canHaveHybrid) || (((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100) ==0){
       element10.innerHTML = `This site has been flagged as requiring Standalone (not hybrid) - please see above  &#10071; `;
@@ -241,9 +321,16 @@ xhr.onreadystatechange = function() {
 
     }
 
+
     else if ((100-(((pTagsPresent+aTagsPresent+h1TagsPresent+h2TagsPresent+h3TagsPresent)/(atagcontent.length+h1tagcontent.length+h2tagcontent.length+h3TagsPresent+ptagcontent.length))*100))>80){
+      if(needsChecks){
+      element10.innerHTML = `This site has been flagged as having a very large amount of client side rendering content - it is highly likely Standalone is required  &#10071; `;
+      element10.style.color = 'red';  
+      }
+      else{
       element10.innerHTML = `This site has been flagged as having a very large amount of client side rendering content - it is highly likely Standalone is required  &#10071; `;
       element10.style.color = 'red';
+      }
 
     }
 
